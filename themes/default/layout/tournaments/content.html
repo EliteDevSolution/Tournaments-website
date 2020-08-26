@@ -1,0 +1,60 @@
+<div class="user-setting-panel pt_shadow">
+	<div class="">
+		<div class="upload-head">
+			<h4>Tournaments/<?php
+				if(!empty($_POST['type']))
+				 	echo $_POST['type'];
+				else if(!empty($_GET['go']))
+					echo $_GET['go'];
+				else 
+				    echo 'All';
+				?>
+				<div class="pull-right dropdown">
+					<span class="dropdown-toggle" data-toggle="dropdown" role="button" title="{{LANG sort_by}}"><svg class="feather feather-filter" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg></span>
+					<div class="dropdown-menu dropdown-menu-right vid_stud_filtr">
+						<form class="search_filter_form" method="POST" action="">
+							<div class="dropdown-item">
+								<label for="_views_">
+								<input type="radio" name="type" id="_views_" value="Upcomming" <?php echo (!empty($_POST['type']) && $_POST['type'] == 'upcomming' || $_GET['go'] == 'Upcomming') ? 'checked': ''?>>
+								<span>Upcomming</span>
+								</label>
+							</div>
+							<div class="dropdown-item">
+								<label for="_likes_">
+								<input type="radio" name="type" id="_likes_" value="Completed" <?php echo (!empty($_POST['type']) && $_POST['type'] == 'completed' || $_GET['go'] == 'Completed') ? 'checked': ''?>>
+								<span>Completed</span>
+								</label>
+							</div>
+							<div class="dropdown-item">
+								<label for="_dislikes_">
+								<input type="radio" name="type" id="_dislikes_" value="All" <?php echo (!empty($_POST['type']) && $_POST['type'] == 'all') ? 'checked': ''?>>
+								<span>All</span>
+								</label>
+							</div>
+						</form>
+					</div>
+				</div>
+			</h4>
+			<div class="clear"></div>
+			<hr>
+		</div>
+		<div class="subscriptions-list">
+			<div class="author-list">
+				{{TOURS}}
+			</div>
+			<?php if (count($pt->tours) > 0) { ?>
+				<div class="watch-video-show-more desc load-more" data-type="video_studio" <?php if (!empty($_POST['type'])) { ?>sort-type="<?php echo($_POST['type']); ?>" <?php } ?>>
+					Show more
+				</div>
+			<?php } ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+</div>
+<br>
+<script type="text/javascript">
+$(".vid_stud_filtr input[type=radio]").change(function(){
+	$('form.search_filter_form').submit();
+});
+</script>

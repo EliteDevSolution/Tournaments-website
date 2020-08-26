@@ -1,0 +1,160 @@
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>DASHBOARD <small>	The data is updated every 30 mins.</small></h2>
+    </div>
+    <!-- Widgets -->
+    <div class="row clearfix">
+        <div class="col-lg-3 col-md-3">
+            <div class="info-box bg-pink hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">video_library</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL VIDEOS</div>
+                    <div class="number count-to" data-from="0" data-to="{{CONFIG total_videos}}" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-cyan hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">remove_red_eye</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL VIDEOS VIEWS</div>
+                    <div class="number count-to" data-from="0" data-to="{{CONFIG total_views}}" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-light-green hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">people</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL USERS</div>
+                    <div class="number count-to" data-from="0" data-to="{{CONFIG total_users}}" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-orange hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">person_add</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL SUBSCRIPTIONS</div>
+                    <div class="number count-to" data-from="0" data-to="{{CONFIG total_subs}}" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-purple hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">comment</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL VIDEOS COMMENTS</div>
+                    <div class="number count-to" data-from="0" data-to="{{CONFIG total_comments}}" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-blue hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">thumb_up</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL VIDEOS LIKES</div>
+                    <div class="number count-to" data-from="0" data-to="{{CONFIG total_likes}}" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-red hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">thumb_down</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL VIDEOS DISLIKES</div>
+                    <div class="number count-to" data-from="0" data-to="{{CONFIG total_dislikes}}" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-indigo hover-expand-effect">
+                <div class="icon">
+                    <i class="material-icons">save</i>
+                </div>
+                <div class="content">
+                    <div class="text">TOTAL SAVED VIDEOS</div>
+                    <div class="number count-to" data-from="0" data-to="{{CONFIG total_saved}}" data-speed="1000" data-fresh-interval="20"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #END# Widgets -->
+    <div class="row clearfix">
+        <!-- Bar Chart -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>USERS STATICS</h2>
+                </div>
+                <div class="body">
+                    <div id="bar_users_chart" class="graph"></div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Bar Chart -->
+        <!-- Bar Chart -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>VIDEOS STATICS</h2>
+                </div>
+                <div class="body">
+                    <div id="bar_videos_chart" class="graph"></div>
+                </div>
+            </div>
+        </div>
+        <!-- #END# Bar Chart -->
+    </div>
+</div>
+
+<script>    
+$(function () {
+    Morris.Bar({
+        // ID of the element in which to draw the chart.
+        element: 'bar_videos_chart',
+
+        // Chart data records -- each entry in this array corresponds to a point
+        // on the chart.
+        data: {{CONFIG videos_statics}},
+
+            xkey: 'month',
+            ykeys: ['new_videos'],
+            labels: ['Added Videos'],
+            pointSize: 1,
+            hideHover: 'auto',
+            resize: true,
+            barColors: ['#E91E63']
+    });
+    Morris.Bar({
+        // ID of the element in which to draw the chart.
+        element: 'bar_users_chart',
+
+        // Chart data records -- each entry in this array corresponds to a point
+        // on the chart.
+        data: {{CONFIG user_statics}},
+
+            xkey: 'month',
+            ykeys: ['new_users'],
+            labels: ['New Users'],
+            pointSize: 1,
+            hideHover: 'auto',
+            resize: true,
+            barColors: ['#8BC34A']
+    });
+});
+</script>

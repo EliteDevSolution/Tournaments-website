@@ -1,0 +1,24 @@
+<div class="user-setting-panel pt_shadow">
+	<div class="">
+		<div class="upload-head">
+			<h4>News
+			</h4>
+			<div class="clear"></div>
+			<hr>
+		</div>
+		<div class="subscriptions-list">
+			<div class="author-list">
+				{{NEWS}}
+			</div>
+			<?php if (count($pt->news) > 0) { ?>
+				<div class="watch-video-show-more desc load-more" data-type="video_studio">
+					Show more
+				</div>
+			<?php } ?>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+</div>
+<br>
+</script>

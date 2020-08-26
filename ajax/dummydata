@@ -1,0 +1,553 @@
+Array
+(
+    [@attributes] => Array
+        (
+            [type] => array
+        )
+
+    [tournament] => Array
+        (
+            [0] => SimpleXMLElement Object
+                (
+                    [id] => 5765872
+                    [name] => Fifa
+                    [url] => 1lpjz0l
+                    [description] => This is fifa tournament.
+                    [tournament-type] => round robin
+                    [started-at] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => dateTime
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [completed-at] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => dateTime
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [require-score-agreement] => false
+                    [notify-users-when-matches-open] => true
+                    [created-at] => 2019-04-05T22:40:10-04:00
+                    [updated-at] => 2019-04-05T22:40:10-04:00
+                    [state] => pending
+                    [open-signup] => false
+                    [notify-users-when-the-tournament-ends] => true
+                    [progress-meter] => 0
+                    [quick-advance] => false
+                    [hold-third-place-match] => false
+                    [pts-for-game-win] => 0.0
+                    [pts-for-game-tie] => 0.0
+                    [pts-for-match-win] => 1.0
+                    [pts-for-match-tie] => 0.5
+                    [pts-for-bye] => 1.0
+                    [swiss-rounds] => 0
+                    [private] => false
+                    [ranked-by] => game wins
+                    [show-rounds] => true
+                    [hide-forum] => false
+                    [sequential-pairings] => false
+                    [accept-attachments] => false
+                    [rr-pts-for-game-win] => 0.0
+                    [rr-pts-for-game-tie] => 0.0
+                    [rr-pts-for-match-win] => 1.0
+                    [rr-pts-for-match-tie] => 0.5
+                    [created-by-api] => false
+                    [credit-capped] => false
+                    [category] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [hide-seeds] => false
+                    [prediction-method] => 0
+                    [predictions-opened-at] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => dateTime
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [anonymous-voting] => false
+                    [max-predictions-per-user] => 1
+                    [signup-cap] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => integer
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [game-id] => 44822
+                    [participants-count] => 0
+                    [group-stages-enabled] => false
+                    [allow-participant-match-reporting] => true
+                    [teams] => false
+                    [check-in-duration] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => integer
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [start-at] => 2019-04-25T03:30:00-04:00
+                    [started-checking-in-at] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => dateTime
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [tie-breaks] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => array
+                                )
+
+                            [tie-break] => Array
+                                (
+                                    [0] => match wins vs tied
+                                    [1] => match wins
+                                    [2] => points scored
+                                )
+
+                        )
+
+                    [locked-at] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => dateTime
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [event-id] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => integer
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [public-predictions-before-start-time] => false
+                    [ranked] => false
+                    [grand-finals-modifier] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => enum
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [predict-the-losers-bracket] => false
+                    [spam] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => boolean
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [ham] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => boolean
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [rr-iterations] => 3
+                    [tournament-registration-id] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => integer
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [donation-contest-enabled] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => boolean
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [mandatory-donation] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => boolean
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [non-elimination-tournament-data] => SimpleXMLElement Object
+                        (
+                            [participants-per-match] => SimpleXMLElement Object
+                                (
+                                )
+
+                        )
+
+                    [auto-assign-stations] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => boolean
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [only-start-matches-with-stations] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => boolean
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [registration-fee] => 0.0
+                    [registration-type] => free
+                    [description-source] => This is fifa tournament.
+                    [subdomain] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [full-challonge-url] => https://challonge.com/1lpjz0l
+                    [live-image-url] => https://challonge.com/1lpjz0l.svg
+                    [sign-up-url] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [review-before-finalizing] => true
+                    [accepting-predictions] => false
+                    [participants-locked] => false
+                    [game-name] => FIFA 18
+                    [participants-swappable] => true
+                    [team-convertable] => false
+                    [group-stages-were-started] => false
+                )
+
+            [1] => SimpleXMLElement Object
+                (
+                    [id] => 5872992
+                    [name] => 23332
+                    [url] => a5k259gh
+                    [description] => 23423423423
+                    [tournament-type] => single elimination
+                    [started-at] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => dateTime
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [completed-at] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => dateTime
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [require-score-agreement] => false
+                    [notify-users-when-matches-open] => true
+                    [created-at] => 2019-04-23T15:01:13-04:00
+                    [updated-at] => 2019-04-23T15:02:30-04:00
+                    [state] => accepting_predictions
+                    [open-signup] => false
+                    [notify-users-when-the-tournament-ends] => true
+                    [progress-meter] => 0
+                    [quick-advance] => false
+                    [hold-third-place-match] => false
+                    [pts-for-game-win] => 0.0
+                    [pts-for-game-tie] => 0.0
+                    [pts-for-match-win] => 1.0
+                    [pts-for-match-tie] => 0.5
+                    [pts-for-bye] => 1.0
+                    [swiss-rounds] => 0
+                    [private] => false
+                    [ranked-by] => match wins
+                    [show-rounds] => true
+                    [hide-forum] => false
+                    [sequential-pairings] => false
+                    [accept-attachments] => false
+                    [rr-pts-for-game-win] => 0.0
+                    [rr-pts-for-game-tie] => 0.0
+                    [rr-pts-for-match-win] => 1.0
+                    [rr-pts-for-match-tie] => 0.5
+                    [created-by-api] => false
+                    [credit-capped] => false
+                    [category] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [hide-seeds] => false
+                    [prediction-method] => 1
+                    [predictions-opened-at] => 2019-04-23T15:02:30-04:00
+                    [anonymous-voting] => false
+                    [max-predictions-per-user] => 1
+                    [signup-cap] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => integer
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [game-id] => 155562
+                    [participants-count] => 8
+                    [group-stages-enabled] => false
+                    [allow-participant-match-reporting] => true
+                    [teams] => false
+                    [check-in-duration] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => integer
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [start-at] => 2019-04-23T15:58:00-04:00
+                    [started-checking-in-at] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => dateTime
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [tie-breaks] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => array
+                                )
+
+                            [tie-break] => Array
+                                (
+                                    [0] => match wins vs tied
+                                    [1] => game wins
+                                    [2] => points scored
+                                )
+
+                        )
+
+                    [locked-at] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => dateTime
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [event-id] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => integer
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [public-predictions-before-start-time] => false
+                    [ranked] => false
+                    [grand-finals-modifier] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => enum
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [predict-the-losers-bracket] => false
+                    [spam] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => boolean
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [ham] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => boolean
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [rr-iterations] => 1
+                    [tournament-registration-id] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => integer
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [donation-contest-enabled] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => boolean
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [mandatory-donation] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => boolean
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [non-elimination-tournament-data] => SimpleXMLElement Object
+                        (
+                            [participants-per-match] => SimpleXMLElement Object
+                                (
+                                )
+
+                        )
+
+                    [auto-assign-stations] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => boolean
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [only-start-matches-with-stations] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [type] => boolean
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [registration-fee] => 0.0
+                    [registration-type] => free
+                    [description-source] => 23423423423
+                    [subdomain] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [full-challonge-url] => https://challonge.com/a5k259gh
+                    [live-image-url] => https://challonge.com/a5k259gh.svg
+                    [sign-up-url] => SimpleXMLElement Object
+                        (
+                            [@attributes] => Array
+                                (
+                                    [nil] => true
+                                )
+
+                        )
+
+                    [review-before-finalizing] => true
+                    [accepting-predictions] => true
+                    [participants-locked] => true
+                    [game-name] => 234234
+                    [participants-swappable] => false
+                    [team-convertable] => false
+                    [group-stages-were-started] => false
+                )
+
+        )
+
+)
+
+[]

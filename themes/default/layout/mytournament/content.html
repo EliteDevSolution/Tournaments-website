@@ -1,0 +1,120 @@
+<div class="col-md-8 no-padding-right no-padding-left" style="margin-bottom: 20px;" >
+	<div class="articles-content">
+		<div class="subscriptions-list author-list articles-container">
+			<h3 class="recent-articles">My Tournament
+				<?php if ($pt->user->verified == 1 && PT_IsAdmin()) { ?>
+					<a href="{{LINK create-tournament}}" class="btn btn-main pull-right" data-load="?link1=create-tournament">
+					<i class="fa fa-plus"></i>
+					Create </a><div class="clear"></div>
+				<?php } ?>
+			</h3>
+			{{POSTS}}
+		</div>
+		<?php if ($pt->total_pages > 1) { ?>
+			<div>
+				<hr>
+				<div class="pull-left showing_pages">
+		        	<?php echo "Showing $pt->page_number out of " . $pt->total_pages; ?>
+		        </div>
+		        <div class="pull-right">
+		        	<nav class="">
+		                <ul class="pagination">
+		                	<li>
+		                        <a href="{{LINK mytournament?page_id=1}}" class="waves-effect" title='First Page'>
+		                            <i class="material-icons">first_page</i>
+		                        </a>
+		                    </li>
+		                    <?php if ($pt->page_number > 1) {  ?>
+		                    <li>
+		                        <a href="{{LINK mytournament?page_id=<?php echo($pt->page_number - 1) ?>}}" class="waves-effect" title='Previous Page'>
+		                            <i class="material-icons">chevron_left</i>
+		                        </a>
+		                    </li>
+		                    <?php  } ?>
+		                    <?php 
+		                    $nums = 0;
+		                    $nums_pages = ($pt->page_number > 3) ? ($pt->page_number - 3) : $pt->page_number;
+		                    for ($i=$nums_pages; $i <= $pt->total_pages; $i++) { 
+		                    	if ($nums < 4) {
+		                    	?>
+		                    	<li class="<?php echo ($pt->page_number == $i) ? 'active' : ''; ?>"><a href="{{LINK mytournament?page_id=<?php echo($i) ?>}}" class="waves-effect"><?php echo $i ?></a></li>
+		                    	<?php
+		                    	}
+		                    	$nums++;
+		                    }
+		                    ?>
+		                    <?php if ($pt->total_pages > $pt->page_number) { ?>
+		                    <li>
+		                        <a href="{{LINK mytournament?page_id=<?php echo($pt->page_number + 1) ?>}}" class="waves-effect" title="Next Page">
+		                            <i class="material-icons">chevron_right</i>
+		                        </a>
+		                    </li>
+		                    <?php } ?>
+		                    <li>
+		                        <a href="{{LINK my_team?page_id=<?php echo($pt->total_pages) ?>}}" class="waves-effect" title='Last Page'>
+		                            <i class="material-icons">last_page</i>
+		                        </a>
+		                    </li>
+		                </ul>
+		            </nav>
+		        </div>
+			</div>
+        <?php } ?>
+	</div>
+</div>
+<div class="col-md-4">
+	<br>
+	<div class="read-article-sidebar read-content">
+		<div class="ra-sidebar-head">
+			<h4><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-video"><path fill="currentColor" d="M16,13C15.71,13 15.38,13 15.03,13.05C16.19,13.89 17,15 17,16.5V19H23V16.5C23,14.17 18.33,13 16,13M8,13C5.67,13 1,14.17 1,16.5V19H15V16.5C15,14.17 10.33,13 8,13M8,11A3,3 0 0,0 11,8A3,3 0 0,0 8,5A3,3 0 0,0 5,8A3,3 0 0,0 8,11M16,11A3,3 0 0,0 19,8A3,3 0 0,0 16,5A3,3 0 0,0 13,8A3,3 0 0,0 16,11Z"></path></svg> JOINED TOURNAMENTS</h4>
+		</div>
+		<div class="ra-sidebar-body"> 
+         {{TOURLIST}}
+		</div>
+	</div>  
+</div>
+<script type="text/javascript">
+	function PT_ACCEPT(obj)
+	{
+		var userid = $(obj).attr('userid');
+		var teamid = $(obj).attr('teamid');
+		var status = $(obj).attr('state');
+		var id = $(obj).attr('uniqueid');
+		//$('#strstate_' + id).text('ok');
+		$.post('{{LINK aj/teams/accept-request}}', {id: id, status:status}, function(data, textStatus, xhr) {
+		    if (data.status == 200) {
+		        if(status == 'ACCEPTED')
+		        {
+		        	$('#strstate_' + id).text('JOIN');
+		        	$(obj).attr('state','JOIN');
+
+		        }	else 
+		        {
+		        	$('#strstate_' + id).text('ACCEPTED');
+		        	$(obj).attr('state','ACCEPTED');
+		        }
+		    }
+		});
+	}
+
+	function PT_DeleteTournament(id) {
+	  if (!id) {
+	    return false;
+	  }
+	  swal({
+	    title: '{{LANG confirmation}}',
+	    text: "Are you sure you want to delete this team?",
+	    type: 'warning',
+	    showCancelButton: true,
+	    confirmButtonColor: '#3085d6',
+	    cancelButtonColor: '#d33',
+	    confirmButtonText: '{{LANG yes_del}}'}).then(function(){
+		  $.post('{{LINK aj/tournaments/delete-tournament}}', {id: id}, function(data, textStatus, xhr) {
+		    if (data.status == 200) {
+		        window.location.reload();
+		    }
+		  });
+		});  
+}
+	
+</script>

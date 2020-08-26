@@ -1,0 +1,547 @@
+<style type="text/css">
+  .color-red
+  {
+    color: red !important
+  }
+</style>
+<?php if($pt->surecheckout == 1)
+  { ?>
+    <h2 class="text-center">Congratulations on your participation in the Tournament!</h2>
+<?php } else { ?>   
+    <h2 class="text-center">{{TITLE}}</h2>
+<?php } ?>
+<?php if(!empty($pt->paytmChecksum)) { 
+  if($pt->paytmstate) { ?>
+   <div id="paytm-success" class="alert alert-success">The tournament join is successed.</div>
+ <?php } else { ?>
+  <div id="paytm-error" class="errors alert alert-danger">The tournament join is failed.</div>
+<?php } }?>
+  <div class="pt_featured_video">
+      <h4 title="Featured video">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>{{STATE}}
+      </h4>  
+      <div class="video-player">
+          <a>
+              <div class="thumbnail_holder"><img src="{{IMAGE}}"></div>
+          </a>
+          <div class="video-title">
+              <input type="hidden" value="2" id="video-id">
+              <div class="video_title_combo">
+              <div>
+              <div class="publisher-element">
+                  <div class="publisher-name">
+                    {{DESC}}
+                  </div>
+                  <div class="clear"></div>
+              </div>
+              <div>
+                 <h5><i class="fa fa-gamepad" aria-hidden="true"></i> {{GAMENAME}}
+                </h5>
+              </div>
+              <div>
+                 <h5><i class="fa fa-mobile" aria-hidden="true"></i> {{PLATFORM}}
+                </h5>
+              </div>
+              <div>
+                 <font size='+1'><b><i class="fa fa-calendar" aria-hidden="true"></i> {{STARTDATETIME}}&nbsp;&nbsp; <i class="fa fa-trophy"></i>&nbsp;&nbsp; 
+                  <?php if(number_format($pt->tour->eventfee) != 0) { ?> {{CURRENCY}} <?php } else { ?> Point <?php } ?>{{POOLSHOW}} &nbsp;<i class="fa fa-users"></i> &nbsp;&nbsp;<label id="joincnt">{{JOINCNT}}</label>/{{MAXPLAYER}}
+                </h5></b></font>
+              </div>  
+              <?php if($pt->surecheckout == 1){ ?>
+              <div>
+                 <h5><i class="fa fa-check-circle" aria-hidden="true"></i> {{CHECKOUT}}
+                </h5>
+              </div>
+              <?php } ?>
+              <?php if ($pt->user->verified == 1 && $pt->joined == 'JOIN NOW') { $disabled = ''; } else 
+              {$disabled = 'disabled';}?>
+              <div style="position:absolute;left: 40%">
+                      <div>
+                          <?php if($pt->surecheckout == 0){ ?>
+                          <button  id="btn-join" class="btn btn-main setting-panel-mdbtn" <?=$disabled?>><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>{{JOINED}}
+                          <?php if(number_format($pt->tour->eventfee) != 0)
+                           echo '('.$pt->currency.' '.number_format($pt->tour->eventfee).')'; ?>
+                          </button> <?php } else if($pt->surecheckout == 1) { ?>
+                          <button  id="btn-report" class="btn btn-main setting-panel-mdbtn" <?php 
+                          if($pt->surereport == 1) echo 'disabled'; else echo '';?>><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            <?php if($pt->surereport == 1)  echo 'Already Report'; else echo 'Report Result';?> 
+                          </button>
+                          <?php } ?>
+                          <input type="hidden" id="joinfee" value="{{EVENTFEE}}" />
+                          <button id="btn-rules" class="btn btn-success setting-panel-mdbtn"><i class="fa fa-users"></i> GAME RULES</button>
+                      </div>
+                  </div>
+              </div>
+              <div class="clear"></div>
+          </div>
+      </div>
+  </div>
+<div class="read-content no-padding-right no-padding-left">     
+
+		<div class="read-article-comments-container">
+			<div class="comments-content content">
+				<div class="comments-header">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg> Participants : {{JOINCNT}} PLAYERS
+				</div>
+				<hr>
+				<div class="" id="post-comments">
+          {{INVITEUSERLIST}}
+				</div>
+			</div>
+		</div>    
+	</div>
+	<div class="clear"></div>
+</div>
+<script>
+  jQuery(document).ready(function($) {
+    PT_Delay(function(){
+      $('#paytm-error').hide();
+      $('#paytm-success').hide();
+    },3000);
+    <?php if($pt->joined == 'JOIN NOW') { ?> 
+      $('#btn-join').click(function(event)
+      {
+           var eventfee = $('#joinfee').val();
+           if(eventfee != '')
+           {
+              $('#join_modal').modal();
+           } else
+           {
+              sucessJoin();
+           }
+      });
+    <?php } ?>
+    <?php if($pt->surereport == 0) { ?>
+    $('#btn-report').click(function(event)
+    {
+      $('#report_modal').modal();
+    });
+    <?php } ?>
+
+    $('.edit-thumb').on('click', function(event) {
+        $('#thumbnail').trigger('click');
+    });
+    $('#thumbnail').on('change', function(event) {
+       readURL(this);
+    });
+
+    $('#submit-btn').click(function()
+    {
+      $('#report_form').ajaxSubmit({
+        url: '{{LINK aj/tournaments/send-report}}?hash=' + $('.main_session').val(),
+        beforeSend: function() {
+          $('#submit-btn').attr('disabled', false);
+          $('#submit-btn').text("{{LANG please_wait}}");
+        },
+        success: function(data) {
+          if (data.status == 200) {
+            Snackbar.show({text: "<div>"+ "The Operation Suceessed!" +"</div>"});
+            setTimeout(function () {
+                  window.location.reload();
+              },2000);
+          } else {
+            $('#submit-btn').attr('disabled', false);
+              $('#submit-btn').html('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> {{LANG publish}}');
+            Snackbar.show({text: "<div>"+ data.message +"</div>"});
+          }
+        }
+      });
+    });
+
+    function sucessJoin()
+    {
+      $.ajax({
+          url: '{{LINK aj/tournaments/tour-join}}',
+          type: 'POST',
+          dataType: 'json',
+          data: {id: '{{ID}}'},
+        })
+        .done(function(data) {
+          if (data.status == 200) {
+            $("#btn-join").html("<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check-circle'><path d='M22 11.08V12a10 10 0 1 1-5.93-9.14'></path><polyline points='22 4 12 14.01 9 11.01'></polyline></svg>JOINED");
+            $('#joincnt').text(parseInt($('#joincnt').text()) + 1);
+            $('#btn-join').attr("disabled","disabled");
+          } else 
+          {
+            swal(
+                 'Error!',
+                 'Something went wrong.Please try again!',
+                 'error'
+               );
+          }
+        })
+        .fail(function() {
+          swal(
+                 'Error!',
+                 'Something went wrong.Please try again!',
+                 'error'
+               );
+          })
+    }
+      $('#paidwallet').click();
+      $('#btn-modal-join').on('click', function(event)
+      {
+         var amount =  $('#amount').val();
+         if($('#paidwallet').prop('checked') == true)
+         {
+            var wallet = $("#mywallet").val();
+               if (parseFloat(amount) > parseFloat(wallet))
+               {
+                  Snackbar.show({text: "<div>"+ "Your wallet is to low!" +"</div>"});
+                  return false;
+               }
+           $.ajax({
+                       url: '{{LINK aj/wallet/paidwallet}}',
+                       type: 'POST',
+                       dataType: 'json',
+                       data: {amount:amount},
+                    })
+                    .done(function(data) {
+                       if (data.status == 200) {
+                          swal({
+                             title:"SUCCESS",
+                             text:"Congratulation for your joined!",
+                             type:"success"
+                          });
+                          sucessJoin();
+                          $('#join_modal').modal('toggle');
+                          //setTimeoutfunction(){ document.location.reload(true);}, 3000);
+                       }
+                       else{
+                          swal({
+                             title:"{{LANG error}}",
+                             text:"{{LANG error_msg}}",
+                             type:"error"
+                          });
+                       }
+                    })
+                    .fail(function() {
+                       swal({
+                          title:"{{LANG error}}",
+                          text:"{{LANG error_msg}}",
+                          type:"error"
+                       });
+                    });
+              } else if($('#paidcash').prop('checked') == true)
+              {
+                  $("#btn-modal-join").attr("disabled","disabled");
+                  <?php 
+                  $checkSum = "";
+                  $paramList = array();
+
+                  $ORDER_ID = "ORDS" . rand(10000,99999999);
+                  $CUST_ID = "CUST".rand(10000,99999999);
+                  $INDUSTRY_TYPE_ID = "Retail";
+                  $CHANNEL_ID = "WEB";
+                  $TXN_AMOUNT = number_format($pt->tour->eventfee);
+
+                  // Create an array having all required parameters for creating checksum.
+                  $paramList["MID"] = PAYTM_MERCHANT_MID;
+                  $paramList["ORDER_ID"] = $ORDER_ID;
+                  $paramList["CUST_ID"] = $CUST_ID;
+                  $paramList["INDUSTRY_TYPE_ID"] = $INDUSTRY_TYPE_ID;
+                  $paramList["CHANNEL_ID"] = $CHANNEL_ID;
+                  $paramList["TXN_AMOUNT"] = $TXN_AMOUNT;
+                  $paramList["WEBSITE"] = PAYTM_MERCHANT_WEBSITE;
+                  $paramList["CALLBACK_URL"] = PT_Link("tournament_read?id=".$pt->tour->id);
+                  $phonenumber = $pt->user->phonenumber;
+                  $phonenumber = str_replace('+', '', $phonenumber); 
+                  $paramList["MSISDN"] = $phonenumber; //Mobile number of customer
+                  $paramList["EMAIL"] = $pt->user->email; //Email ID of customer
+                  $paramList["VERIFIED_BY"] = "EMAIL"; //
+                  $paramList["IS_USER_VERIFIED"] = "YES"; //
+                  //Here checksum string will return by getChecksumFromArray() function.
+                  $checkSum = getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
+                  $paramList["CHECKSUMHASH"] = $checkSum;
+                  $htmldata = "";
+                  foreach($paramList as $name => $value) {
+                     $htmldata.= '<input type="hidden" name="' . $name .'" value="' . $value . '">';
+                  }
+                  ?>
+                  $('#paytmform').html('<?=$htmldata?>');
+                  $('#paytmform').submit();
+            } 
+      });
+
+      $('#btn-rules').click(function(event)
+      {
+        $('#game_rules_model').modal();
+      });
+      $('.share-post-btn').click(function(event) {
+        $.ajax({
+          url: '{{LINK aj/main/share}}',
+          type: 'POST',
+          dataType: 'json',
+          data: {post_id: '{{ID}}'},
+        })
+        .done(function(data) {
+          if (data.status == 200) {
+            $('#post-shares').text(data.shared);
+          }
+        })
+        .fail(function() {
+          console.log("error");
+        })
+      });
+
+      $(".load-comments").click(function(event) {
+        var self = $(this);
+        var last_id = ($(".article-comments").length > 0) ? $(".article-comments:last").attr('data-id') : 0;
+        $.ajax({
+          url: '{{LINK aj/load-more-comments}}',
+          type: 'POST',
+          dataType: 'json',
+          data: {last_id: last_id,post_id:'{{ID}}'},
+        })
+        .done(function(data) {
+          if (data.status == 200) {
+            $('#post-comments').append(data.comments);
+          }
+          else{
+            self.text(data.message);
+          }
+        })
+        .fail(function() {
+          console.log("error");
+        })
+      });
+
+      var post = '{{ID}}';
+      var form = $(".submit-article-commet");
+      var hash = $('.main_session').val();
+      $(".submit-article-commet").ajaxForm({
+          url: '{{LINK aj/teams/add-invite-request}}',
+          type:'POST',
+          data:{team_id:'{{ID}}',hash:hash},
+          beforeSend: function() {
+            var query = form.find('textarea').val();
+            if (!query){
+               swal(
+                 'Error!',
+                 'Input Invite username/useremail. Please try again!',
+                 'error'
+               );
+               return false;
+            }
+            else if(query.length > 600){
+              swal(
+                 'Error!',
+                 'Something went wrong.Please try again!',
+                 'error'
+               );
+               return false;
+            }
+          },
+          success: function(data) {
+            if (data.status == 200) {
+              swal(
+                 'success!',
+                 'The invitation request sent successfully.',
+                 'success'
+               );
+               form.find('textarea').val('');
+               form.find('textarea').focus();
+
+            } else if(data.status == 220)
+            {
+              swal(
+                 'success!',
+                 'The invitation request resent successfully.',
+                 'success'
+               );
+               form.find('textarea').val('');
+               form.find('textarea').focus();
+            }
+            else if(data.status == 300)
+            {
+              swal(
+                 'Error!',
+                 'UserName/Email not exists!',
+                 'error'
+               );
+            } else if(data.status == 50)
+            {
+               swal(
+                   'Warning!',
+                   'The user has already been invited.',
+                   'warning'
+                 ); 
+            } else if(data.status == 100)
+            {
+              swal(
+                 'Warning!',
+                 'You can not invite yourself.',
+                 'warning'
+               );
+            }
+            else {
+               swal(
+                 'Error!',
+                 'Something went wrong.Please try again later!',
+                 'error'
+               );
+            }
+          }
+      });
+  });
+
+  function PT_DeleteComment(id) {
+      if (!$('#main-container').attr('data-logged') && $('#main-url').val()) {
+        window.location.href = PT_Ajax_Requests_File() + 'login?to=' + $('#main-url').val();
+        return false;
+      }
+
+      swal({
+        title: "{{LANG confirmation}}",
+        text: "{{LANG delete_confirmation}}",
+        type: "warning",
+        confirmButtonText:"{{LANG yes_del}}",
+        cancelButtonText:"{{LANG cancel}}",
+        showCancelButton:true,
+      })
+      .then(function(willDelete){
+         if (willDelete) {
+            if (!id) { return false; }
+
+            $('#comment-' + id).slideUp('fast');
+            $.post('{{LINK aj/delete-comment}}', {id: id});
+         }
+         else {
+            swal.close();
+         }
+      },
+      function(){
+         //pass
+      });      
+  }
+
+  function PT_LikePost(self,type){
+    if (!self || (type != 'up' && type != 'down')){
+      return false;
+    }
+
+    else if (!$('#main-container').attr('data-logged') && $('#main-url').val()) {
+      window.location.href = PT_Ajax_Requests_File() + 'login?to=' + $('#main-url').val();
+      return false;
+    }
+
+    var self = $(self);
+    $.ajax({
+      url: '{{LINK aj/like-system/}}' + type,
+      type: 'POST',
+      dataType: 'json',
+      data: {post_id: '{{ID}}'}
+    })
+    .done(function(data) {
+      if (data.status == 200 && type == 'up' && data.code == 1){
+        self.find('span').text((data.up));
+        $('[data-post-dislikes]').find('span').text((data.down));
+        self.find('svg.feather').addClass('active');
+        self.siblings().find('svg.feather').removeClass('active');
+        
+      }
+
+      else if (data.status == 200 && type == 'up' && data.code == 0){
+        self.find('span').text((data.up));
+        $('[data-post-dislikes]').find('span').text((data.down));
+        self.find('svg.feather').removeClass('active');
+        self.siblings().find('svg.feather').removeClass('active');
+      }
+
+      else if (data.status == 200 && type == 'down' && data.code == 1){
+        self.find('span').text((data.down));
+        self.find('svg.feather').addClass('active');
+        $('[data-post-likes]').find('span').text((data.up));
+        self.siblings().find('svg.feather').removeClass('active');
+      }
+
+      else if (data.status == 200 && type == 'down' && data.code == 0){
+        self.find('span').text((data.down));
+        self.find('svg.feather').removeClass('active');
+        $('[data-post-likes]').find('span').text((data.up));
+        self.siblings().find('i').removeClass('active');
+      }
+
+      else{
+        swal(
+           'Error!',
+           'Something went wrong.Please try again later!',
+           'error'
+         );
+      }
+    })
+    .fail(function() {
+      console.log("error");
+    })
+   
+  }
+</script>
+<div id="game_rules_model" class="modal fade in" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4>Game Rules</h4>
+            </div>
+            <div class="modal-body"><p>&nbsp;</p>
+              {{RULE}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="join_modal" class="modal fade in" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h3>JOIN</h3>
+            </div>
+            <div class="modal-body">
+              <h4><strong>MyWallet: {{CURRENCY}}{{ME wallet}},  Fee: {{CURRENCY}}{{EVENTFEE}}</strong></h4> 
+              <p>&nbsp;</p>
+                <input type="hidden" id="mywallet" value="{{ME wallet}}" />
+                <input type="hidden" id="amount" value="{{EVENTFEE}}" />
+                <form method="post" action="<?php echo PAYTM_TXN_URL ?>" name="paytmform" id="paytmform">
+                </form>
+               <h4>
+                 <input type="radio" id="paidwallet" name="paidselect" checked/><label for="paidwallet"> Wallet</label>&nbsp;&nbsp;&nbsp;
+                 <input type="radio" id="paidcash" name="paidselect"/><label for="paidcash"> Cash</label>         
+                 <button  id="btn-modal-join" class="btn btn-main pull-right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Okay
+              </button>
+               </h4>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="report_modal" class="modal fade in" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4>Upload Screenshot</h4>
+            </div>
+            <div class="modal-body">
+                    <div class="thumbnail-preview edit-thumb">
+                      <img src="<?=PT_Link('upload/photos/noimage.png')?>" alt="Select the image!">
+                    </div>
+                    <div class="video-title">
+                      <p class="color-red">* Note: You can only upload screenshot once.
+                      <button  id="submit-btn" class="btn btn-main pull-right">
+                      <i class="fa fa-envelope-o" aria-hidden="true"></i> Send</button></p>
+                    </div>
+              </div>
+                  <div class="form-group hidden">
+                  <label class="col-md-12" for="thumbnail">{{LANG thumbnail}}</label>  
+                  <div class="col-md-12">
+                    <form class="form-horizontal setting-panel pt_forms" id="report_form" method="POST">
+                      <input id="thumbnail" name="image" type="file" accept="image/*">
+                      <input type="hidden" value="{{ID}}" name="tourid"/>
+                      <input type="hidden" value="{{CHECKOUT}}" name="checkcode"/>
+                    </form>
+                    <span class="help-block">jpg, png, gif</span>
+                  </div>
+                </div>
+            </div>
+      </div>
+</div>

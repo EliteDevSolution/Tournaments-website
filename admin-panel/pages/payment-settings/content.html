@@ -1,0 +1,185 @@
+<?php
+
+$paypal_live    = ($pt->config->paypal_mode == 'live') ? 'checked' :'';
+$paypal_sb      = ($pt->config->paypal_mode == 'sandbox') ? 'checked' :'';
+
+$paypal_cur_usd = ($pt->config->payment_currency == 'USD') ? 'checked' :'';
+$paypal_cur_eur = ($pt->config->payment_currency == 'EUR') ? 'checked' :'';
+$fastpay_cur_iqd = ($pt->config->payment_currency == 'IQD') ? 'checked' :'';
+$paytm_cur =  ($pt->config->payment_currency == '₹') ? 'checked' : '';
+
+$fastpay_live = ($pt->config->fastpay_mode == 'live') ? 'checked' : '';
+$fastpay_mode  = ($pt->config->fastpay_mode == 'sandbox') ? 'checked' :'';
+
+$paytm_live =   ($pt->config->paytm_mode == 'live') ? 'checked' : '';
+$paytm_sandbox =   ($pt->config->paytm_mode == 'sandbox') ? 'checked' : '';
+
+$pmode_fastpay = ($pt->config->payment_mode == 'fastpay') ? 'checked' : '';
+$pmode_paypal  = ($pt->config->payment_mode == 'paypal') ? 'checked' :'';
+$pmode_paytm  = ($pt->config->payment_mode == 'paytm') ? 'checked' :'';
+
+
+
+
+
+?>
+
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>Settings > Payment Settings</h2>
+    </div>
+    <!-- Vertical Layout -->
+    <div class="row">
+        <div class="col-lg-8 col-md-8 ">
+            <div class="card">
+                <div class="header">
+                    <h2 class="pull-left">Payment Settings</h2>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="body">
+                    <div class="alert alert-success payment-settings-alert"></div>
+                    <form class="payment-settings" method="POST">
+                        <label for="go_pro">Advertisement</label>
+                        <div class="form-group">
+                            <input type="radio" name="user_ads" id="user_ads-enabled" value="on" <?php echo ($pt->config->user_ads == 'on') ? 'checked': '';?>>
+                            <label for="user_ads-enabled">Enabled</label>
+                            <input type="radio" name="user_ads" id="user_ads-disabled" value="off" <?php echo ($pt->config->user_ads == 'off') ? 'checked': '';?>>
+                            <label for="user_ads-disabled" class="m-l-20">Disabled</label>
+                        </div>
+                        <label for="usr_v_mon">Video Monetization</label>
+                        <div class="form-group">
+                            <input type="radio" name="usr_v_mon" id="usr_v_mon-enabled" value="on" <?php echo ($pt->config->usr_v_mon == 'on') ? 'checked': '';?>>
+                            <label for="usr_v_mon-enabled">Enabled</label>
+                            <input type="radio" name="usr_v_mon" id="usr_v_mon-disabled" value="off" <?php echo ($pt->config->usr_v_mon == 'off') ? 'checked': '';?>>
+                            <label for="usr_v_mon-disabled" class="m-l-20">Disabled</label>
+                        </div>
+                        <label for="paypal_mode">Payment Currency</label>
+                            <div class="form-group">
+                            <input type="radio" name="payment_currency" id="comment_system-both" value="USD" <?php echo  $paypal_cur_usd;?>>
+                            <label for="comment_system-both">USD</label>
+                            <input type="radio" name="payment_currency" id="comment_system-own" value="IQD" <?php echo $fastpay_cur_iqd; ?>>
+                            <label for="comment_system-own" class="m-l-20">IQD</label>
+                            <input type="radio" name="payment_currency" id="comment_system-facebook" value="EUR" <?php echo $paypal_cur_eur; ?>>
+                            <label for="comment_system-facebook" class="m-l-20">EUR</label>
+                            <input type="radio" name="payment_currency" id="comment_system-inr" value="₹" <?php echo $paytm_cur; ?>>
+                            <label for="comment_system-inr" class="m-l-20">INR(₹)</label>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" name="ad_v_price" class="form-control" value="{{CONFIG ad_v_price}}">
+                                <label class="form-label">Cost ad by per view</label>
+                            </div>
+
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" name="ad_c_price" class="form-control" value="{{CONFIG ad_c_price}}">
+                                <label class="form-label">Cost ad by per click</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <input type="text" name="pub_price" class="form-control" value="{{CONFIG pub_price}}">
+                                <label class="form-label">Ads publisher price</label>
+                            </div>
+                        </div>
+                        <label for="paypal_mode">Payment Mode</label>
+                        <div class="form-group">
+                            <input type="radio" name="payment_mode" id="fastpay" value="fastpay" <?php echo  $pmode_fastpay;?>>
+                            <label for="fastpay">FastPay</label>
+                            <input type="radio" name="payment_mode" id="paypal" value="paypal"  <?php echo $pmode_paypal;?>>
+                            <label for="paypal" class="m-l-20">PayPal</label>
+                            <input type="radio" name="payment_mode" id="paytm" value="paytm"  <?php echo $pmode_paytm;?>>
+                            <label for="paytm" class="m-l-20">Paytm</label>
+                        </div>
+                        <label for="paypal_mode">PayPal Mode</label>
+                        <div class="form-group">
+                            <input type="radio" name="paypal_mode" id="paypal_mode-enabled" value="live" <?php echo  $paypal_live;?>>
+                            <label for="paypal_mode-enabled">Live</label>
+                            <input type="radio" name="paypal_mode" id="paypal_mode-disabled" value="sandbox" <?php echo $paypal_sb; ?>>
+                            <label for="paypal_mode-disabled" class="m-l-20">SandBox</label>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line focused">
+                                <input type="text" id="paypal_id" name="paypal_id" class="form-control" value="{{CONFIG paypal_id}}">
+                                <label class="form-label">PayPal Clinet ID</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line focused">
+                                <input type="text" id="paypal_secret" name="paypal_secret" class="form-control" value="{{CONFIG paypal_secret}}">
+                                <label class="form-label">PayPal Secret Key</label>
+                            </div>
+                        </div>
+                        <!--- FastPay Mode -->
+                        <label for="paypal_mode">FastPay Mode</label>
+                        <div class="form-group">
+                            <input type="radio" name="fastpay_mode" id="fastpay_mode-enabled" value="live" <?php echo  $fastpay_live;?>>
+                            <label for="fastpay_mode-enabled">Live</label>
+                            <input type="radio" name="fastpay_mode" id="fastpay_mode-disabled" value="sandbox" <?php echo  $fastpay_mode;?>>
+                            <label for="fastpay_mode-disabled" class="m-l-20">SandBox</label>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line focused">
+                                <input type="text" id="fastpay_id" name="fastpay_id" class="form-control" value="{{CONFIG fastpay_id}}">
+                                <label class="form-label">FastPay Merchabt Phone Number</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line focused">
+                                <input type="text" id="fastpay_secret" name="fastpay_secret" class="form-control" value="{{CONFIG fastpay_secret}}">
+                                <label class="form-label">Fastpay Secret Key</label>
+                            </div>
+                        </div>
+                        <!--PayTm Mode -->
+                        <label for="paypal_mode">PayTm Mode</label>
+                        <div class="form-group">
+                            <input type="radio" name="paytm_mode" id="paytm_mode-enabled" value="live" <?php echo  $paytm_live;?>>
+                            <label for="paytm_mode-enabled">Live</label>
+                            <input type="radio" name="paytm_mode" id="paytm_mode-disabled" value="sandbox" <?php echo $paytm_sandbox; ?>>
+                            <label for="paytm_mode-disabled" class="m-l-20">SandBox</label>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line focused">
+                                <input type="text" id="paytm_id" name="paytm_id" class="form-control" value="{{CONFIG paytm_id}}">
+                                <label class="form-label">PayTm Clinet ID</label>
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line focused">
+                                <input type="text" id="paytm_secret" name="paytm_secret" class="form-control" value="{{CONFIG paytm_secret}}">
+                                <label class="form-label">PayTm Secret Key</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <!-- #END# Vertical Layout -->
+    <script>
+
+        $(function() {
+            var form_payment_settings = $('form.payment-settings');
+
+            form_payment_settings.ajaxForm({
+                url: '{{LINK aj/ap/save-settings}}',
+                beforeSend: function() {
+                    form_payment_settings.find('button').text("{{LANG please_wait}}");
+                },
+                success: function(data) {
+                    if (data.status == 200) {
+                        form_payment_settings.find('button').text('Save');
+                        $('.payment-settings-alert').html('<i class="fa fa-check"></i> Settings updated successfully');
+                        setTimeout(function () {
+                            $('.payment-settings-alert').empty();
+                        }, 2000);
+                    }
+                }
+            });
+        });
+    </script>

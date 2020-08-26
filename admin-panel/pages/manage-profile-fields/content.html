@@ -1,0 +1,108 @@
+<?php 
+
+    $page = (!empty($_GET['page-id'])) ? $_GET['page-id'] : 1;
+    $filter_keyword = (!empty($_GET['query'])) ? PT_Secure($_GET['query']) : '';
+    $db->pageLimit  = 50;
+    $type           = 'all';
+
+    if (!empty($filter_keyword)) {
+        $sql    = " (name LIKE '%$filter_keyword%' OR description LIKE '%$filter_keyword%') ";
+        $fields = $db->where($sql)->orderBy('id', 'DESC')->objectbuilder()->paginate(T_FIELDS, $page);
+    } 
+
+    else {
+
+        $fields = $db->objectbuilder()->orderBy('id', 'DESC')->paginate(T_FIELDS, $page);
+    }
+
+    if (($page > $db->totalPages) && !empty($_GET['page-id'])) {
+        header("Location: " . PT_LoadAdminLinkSettings('manage-profile-fields'));
+        exit();
+    }
+?>
+
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>Users > Manage Custom Profile Fields</h2>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Manage & Edit Custom Profile Fields</h2> 
+                    <a href="<?php echo PT_LoadAdminLinkSettings('add-new-profile-field'); ?>" class="btn btn-warning waves-effect waves-light m-t-20">Create New Custom Field</a>
+                </div>
+                <div class="body">
+                   <div class="table-responsive1">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                   <th>ID</th>
+					               <th>Field name</th>
+					               <th>Type</th>
+					               <th>Length</th>
+					               <th>Placement</th>
+					               <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                    foreach ($fields as $field) {
+                                        $field_id = $field->id;
+                                        if ($field->type == 'select') {
+                                          $type   = 'Select box';
+                                        } else if ($field->type == 'textarea') {
+                                          $type   = 'Text area';
+                                        } else if ($field->type == 'textbox') {
+                                          $type   = 'Text box';
+                                        } else{
+                                            $type = 'Unknown';
+                                        }  
+
+                                        echo  PT_LoadAdminPage("manage-profile-fields/list",array(
+                                            'FIELD_ID'     => $field->id,
+                                            'FIELD_NAME'   => $field->name,
+                                            'FIELD_TYPE'   => $type,
+                                            'FIELD_LEN'    => $field->length,
+                                            'FIELD_PLACE'  => $field->placement,
+                                            'EDIT'         => PT_Link("admin-cp/edit-profile-field?id=$field_id"),
+                                        ));
+                                    }
+				                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    </div>
+    <!-- #END# Vertical Layout -->
+<script>
+$(function () {
+    $('table').DataTable();
+});
+
+function PT_DeleteField(id) {
+    if (!id) { return false;}
+    if (!confirm('Are you sure you want to delete this field?')) {
+      return false;
+    }
+    $("[data-prfield-id='"+id+"']").slideUp(function(){
+        $(this).remove();
+    });
+    $.ajax({
+        url: '{{LINK aj/ap/delfield}}',
+        type: 'GET',
+        dataType: 'json',
+        data: {id:id},
+    })
+    .done(function(data) {
+        //pass Deen
+    })
+    .fail(function() {
+        console.log("error");
+    });
+}
+</script>

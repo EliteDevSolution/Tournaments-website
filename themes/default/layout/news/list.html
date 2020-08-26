@@ -1,0 +1,31 @@
+<div class="video-wrapper" data-id="{{ID}}" id="video-{{ID}}">
+	<div class="video-actions vid_stud_acts">
+	    <a>
+			<svg class="feather feather-clock" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> {{TIME}}</span>
+		</a> 
+	</div>
+    <div class="row">
+    	<div class="video-thumb col-md-3">
+        <a href={{URL}} data-load="?link1=read&id={{NEWS_URL}}"><img src="{{THUMBNAIL}}" alt="{{TITLE}}"></a>
+    </div>
+    <div class="video-info col-md-5 no-padding-left">
+        <div class="video-title">
+            <a href={{URL}} data-load="?link1=read&id={{NEWS_URL}}">{{TITLE}}</a> 
+        </div>
+        <div class="video-desc">
+            {{DESC}}
+        </div>
+        <br>
+        <div class="video-views vid_stud_stats">
+            <span><i class="fa fa-calendar" aria-hidden="true"></i> {{CURTIME}}&nbsp;&nbsp;
+            <span><svg class="feather feather-eye" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> {{VIEWS}} {{LANG views}} &nbsp;&nbsp;&nbsp;</span>
+            <span><i class="fa fa-share" aria-hidden="true"></i> {{SHARED}}  Shared &nbsp;&nbsp;&nbsp;</span>
+            
+        </div>
+    </div>
+    </div>
+    <div class="clear"></div>
+    <?php if ($pt->last_news != true) { ?>
+    <hr>
+    <?php } ?>
+</div>

@@ -1,0 +1,100 @@
+<?php 
+$get_ads = $db->orderBy('id', 'DESC')->get(T_VIDEO_ADS);
+?>
+<div class="container-fluid">
+    <div class="block-header">
+        <h2>Advertisement > Manage Video Ads</h2>
+    </div>
+    <!-- Vertical Layout -->
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Manage Video Ads</h2><br>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Create New Ad <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="<?php echo PT_LoadAdminLinkSettings('create-video-ad?type=video'); ?>" class=" waves-effect waves-block">Video Ad</a></li>
+                            <li><a href="<?php echo PT_LoadAdminLinkSettings('create-video-ad?type=image'); ?>" class=" waves-effect waves-block">Image Ad</a></li>
+                            <li><a href="<?php echo PT_LoadAdminLinkSettings('create-video-ad?type=vast'); ?>" class=" waves-effect waves-block">Vast / Vpaid</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="body">
+                   <div class="table-responsive1">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                      <th>ID</th>
+                                      <th>Name</th>
+					                  <th>Type</th>
+					                  <th>Clicks</th>
+					                  <th>Views</th>
+					                  <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                foreach ($get_ads as $key => $video_ad) {
+                                	$type = 'Video Ad';
+                                	if (!empty($video_ad->ad_image)) {
+                                		$type = 'Image Ad';
+                                	}
+                                	if (!empty($video_ad->vast_xml_link)) {
+                                		$type = 'Vast Ad';
+                                	}
+                                	?>
+                                	<tr id="list-<?php echo $video_ad->id ?>" data-id="<?php echo $video_ad->id ?>">
+                                		<td><?php echo $video_ad->id ?></td>
+                                		<td><?php echo $video_ad->name ?></td>
+                                		<td><?php echo $type ?></td>
+                                		<td><?php echo number_format($video_ad->clicks) ?></td>
+                                		<td><?php echo number_format($video_ad->views) ?></td>
+                                		<td>
+                                			<a class="btn btn-info waves-effect waves-light" href="<?php echo PT_LoadAdminLinkSettings('edit-video-ad?id=' . $video_ad->id); ?>">EDIT</a>
+                                			<button class="btn btn-danger waves-effect waves-light delete-content" data-id="<?php echo $video_ad->id ?>">DELETE</button>
+                                		</td>
+                                	</tr>
+                                	<?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <!-- #END# Vertical Layout -->
+<div id="delete-modal" class="modal fade" role="dialog" data-id="">
+  <div class="modal-dialog">
+    <div class="modal-content modal-col-red">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">DELETE AD</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to continue? this action can't be undo</p>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-link waves-effect delete-button" data-dismiss="modal" data-type="video_ad">DELETE</button>
+        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$(function () {
+	$('table').DataTable( {
+        "order": [[ 0, "desc" ]]
+    });
+	$('.delete-content').on('click', function(event) {
+		event.preventDefault();
+		$('#delete-modal').attr('data-id', $(this).attr('data-id')).modal('show');
+	});
+});
+</script>

@@ -1,0 +1,30 @@
+<div class="video-wrapper" data-id="{{ID}}" id="video-{{ID}}">
+	<div class="video-actions vid_stud_acts">
+	    <a>
+			<svg class="feather" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            {{STATE}}
+		</a> 
+	</div>
+    <div class="row">
+    	<div class="video-thumb col-md-3">
+        <a href="{{LINK tournament_read?id={{ID}}}}"><img src="{{THUMBNAIL}}" alt="{{TITLE}}"></a>
+    </div>
+    <div class="video-info col-md-5 no-padding-left">
+        <div class="video-title">
+            <a href="{{LINK tournament_read?id={{ID}}}}">{{TITLE}}</a> 
+        </div>
+        <div class="video-desc">
+            {{DESC}}
+        </div>
+        <br>
+        <div class="video-views vid_stud_stats">
+            <span><i class="fa fa-calendar" aria-hidden="true"></i> {{STARTDATE}}&nbsp;&nbsp; <i class="fa fa-trophy"></i>&nbsp;&nbsp; {{CURRENCY}} {{POOL}} &nbsp;<i class="fa fa-users"></i> &nbsp;&nbsp;{{JOINCNT}}/{{MAXPLAYER}}&nbsp;
+            <svg class="feather feather-clock" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> {{TIME}}</span>
+        </div>
+    </div>
+    </div>
+    <div class="clear"></div>
+    <?php if ($pt->last_tour != true) { ?>
+    <hr>
+    <?php } ?>
+</div>

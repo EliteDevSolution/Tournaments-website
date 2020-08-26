@@ -1,0 +1,30 @@
+<div class="video-wrapper" data-id="{{ID}}" id="video-{{ID}}">
+	<div class="video-actions vid_stud_acts">
+	    <a>
+			<svg class="feather feather-clock" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> {{TIME}}</span>
+		</a> 
+	</div>
+    <div class="row">
+    	<div class="video-thumb col-md-3">
+        <a><img src="{{THUMBNAIL}}" alt="{{TITLE}}"></a>
+    </div>
+    <div class="video-info col-md-5 no-padding-left">
+        <div class="video-title">
+            <a>{{TITLE}}</a> 
+        </div>
+        <div class="video-desc">
+            {{DESC}}
+        </div>
+        <br>
+        <div class="video-views vid_stud_stats">
+            <span><i class="fa fa-calendar" aria-hidden="true"></i> {{CURTIME}}&nbsp;&nbsp;
+            <span><svg class="feather feather-thumbs-up" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg> {{LIKE}} {{LANG likes}} &nbsp;&nbsp;&nbsp;</span>
+            <span><svg class="feather feather-thumbs-down" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path></svg> {{UNLIKE}} {{LANG dislikes}} &nbsp;&nbsp;&nbsp;</span>
+        </div>
+    </div>
+    </div>
+    <div class="clear"></div>
+    <?php if ($pt->last_game != true) { ?>
+    <hr>
+    <?php } ?>
+</div>
