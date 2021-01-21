@@ -46,7 +46,7 @@
     "mysql": "^2.15.0",
     "read-file": "^0.2.0",
     "request": "^2.83.0",
-    "socket.io": "^2.0.4",
+    "socket.io": "^2.4.0",
     "sqlstring": "^2.3.0",
     "sync-mysql": "^3.0.1",
     "unix-time": "^1.0.1",
